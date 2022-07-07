@@ -1,0 +1,130 @@
+{
+  "name": "demo-hero",
+  "displayName": "Demo Hero",
+  "description": "Extension for demo givers",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.68.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:demoHero.helloWorld",
+    "onView:demoHeroTreeView"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "DemoHero",
+      "properties": {
+        "demoHero.storageFile": {
+          "description": "The JSON file DemoHero actions are stored to",
+          "type": "string",
+          "default": "./.demoHeroActions.json"
+        },
+        "demoHero.hideErrorsInTypeMode": {
+          "description": "Sets the workbench error, warnings, and info colors to transparent so they don't appear during automated typing, then sets them back to their original colors once done.",
+          "type": "boolean",
+          "default": "true"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "demoHero.showDemoHeroWebPanel",
+        "title": "DemoHero: Show DemoHero Admin"
+      },
+      {
+        "command": "demoHero.saveCodeFragment",
+        "title": "DemoHero: Save Code Fragment"
+      },
+      {
+        "command": "demoHero.addAction",
+        "title": "Add Action",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "demoHero.deleteAction",
+        "title": "Delete Action",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "demoHero.moveUpAction",
+        "title": "Move Action Up",
+        "icon": "$(chevron-up)"
+      },
+      {
+        "command": "demoHero.moveDownAction",
+        "title": "Move Action Down",
+        "icon": "$(chevron-down)"
+      },
+      {
+        "command": "catCoding.start",
+        "title": "start a new cat coding session",
+        "category": "Cat Coding"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "demoHeroTreeView",
+          "name": "DemoHeroTreeView"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "demoHero.addAction",
+          "when": "view == demoHeroTreeView",
+          "group": "navigation@1"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "demoHero.moveUpAction",
+          "when": "view == demoHeroTreeView",
+          "group": "inline@0"
+        },
+        {
+          "command": "demoHero.moveDownAction",
+          "when": "view == demoHeroTreeView",
+          "group": "inline@1"
+        },
+        {
+          "command": "demoHero.deleteAction",
+          "when": "view == demoHeroTreeView",
+          "group": "inline@2"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "demoHero.saveCodeFragment",
+          "when": "editorTextFocus"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.68.0",
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "16.x",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "glob": "^8.0.3",
+    "mocha": "^10.0.0",
+    "typescript": "^4.7.2",
+    "@vscode/test-electron": "^2.1.3"
+  }
+}
