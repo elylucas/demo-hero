@@ -2,7 +2,10 @@ import { vscode } from './utilities/vscode';
 
 import './App.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import DemoHeroActionList from './components/DemoHeroActionList';
+import ActionList from './components/ActionList';
+import { BrowserRouter, Routes, Route, Outlet, Link } from 'react-router-dom';
+import ActionItemPage from './components/ActionItem';
+import Layout from './components/Layout';
 
 function App() {
   const queryClient = new QueryClient();
@@ -15,10 +18,17 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <main>
-        <h1>Hello World!</h1>
-        <DemoHeroActionList />
-      </main>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/index.html"
+            element={<Layout />}
+          >
+            <Route index element={<ActionList />}></Route>
+            <Route path="actions/:id" element={<ActionItemPage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </QueryClientProvider>
   );
 }

@@ -3,7 +3,7 @@ import { ActionItem } from '../../src/models';
 import { vscode } from './utilities/vscode';
 
 export function useDemoHero() {
-  const info = useQuery<any[]>('actions', fetchActions, {
+  const info = useQuery<ActionItem[]>('actions', fetchActions, {
     refetchOnWindowFocus: false
   });
   vscode.onNewDataAvailable(() => {
